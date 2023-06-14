@@ -54,15 +54,13 @@ const App = () => {
         </section>
       </section>
       <section className='lap-section' ref={lapSectionRef}>
-        <h2>Laps</h2>
+       {laps.length > 0 &&(<h2>Laps</h2>)}
         <section className='laps'>
-          {laps.length > 0 ? (
+          {laps.length > 0 && (
             laps.map((lap, index) => (
               <p key={index}>{lap}</p>
             ))
-          ) : (
-            <p>No laps recorded</p>
-          )}
+          )  }
         </section>
       </section>
     </div>
