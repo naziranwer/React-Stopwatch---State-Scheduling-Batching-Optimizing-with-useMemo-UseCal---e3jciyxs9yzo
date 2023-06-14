@@ -53,8 +53,8 @@ const App = () => {
           <button className="reset-btn" onClick={resetTimer}>RESET</button>
         </section>
       </section>
-      <section className='lap-section' ref={lapSectionRef}>
-       {laps.length > 0 &&(<h2>Laps</h2>)}
+      {laps.length > 0 && (<section className='lap-section' ref={lapSectionRef}>
+       <h2>Laps</h2>
         <section className='laps'>
           {laps.length > 0 && (
             laps.map((lap, index) => (
@@ -62,7 +62,7 @@ const App = () => {
             ))
           )  }
         </section>
-      </section>
+      </section>)}
     </div>
   );
 };
