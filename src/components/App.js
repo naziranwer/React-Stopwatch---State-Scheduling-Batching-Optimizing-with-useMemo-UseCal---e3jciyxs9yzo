@@ -31,7 +31,9 @@ const App = () => {
   const lapTimer = () => {
     const lapTime = (currentTime / 1000).toFixed(3);
     setLaps((prevLaps) => [...prevLaps, lapTime]);
-    lapSectionRef.current.style.display = 'block';
+    if (lapSectionRef.current) {
+      lapSectionRef.current.style.display = 'block';
+    }
   };
 
   const resetTimer = () => {
@@ -39,7 +41,9 @@ const App = () => {
     intervalRef.current = 0;
     setCurrentTime(0);
     setLaps([]);
-    lapSectionRef.current.style.display = 'none';
+    if (lapSectionRef.current) {
+      lapSectionRef.current.style.display = 'none';
+    }
   };
 
   return (
@@ -54,13 +58,13 @@ const App = () => {
         </section>
       </section>
       {laps.length > 0 && (<section className='lap-section' ref={lapSectionRef}>
-       <h2>Laps</h2>
+        <h2>Laps</h2>
         <section className='laps'>
-          
+   
             {laps.map((lap, index) => (
-              <p key={index}>{lap}</p>
+            <p key={index}>{lap}</p>
             ))}
-           
+    
         </section>
       </section>)}
     </div>
@@ -68,3 +72,16 @@ const App = () => {
 };
 
 export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
