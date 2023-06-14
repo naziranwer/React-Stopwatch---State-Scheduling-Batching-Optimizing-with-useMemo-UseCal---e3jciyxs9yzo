@@ -29,12 +29,14 @@ const App = () => {
   };
 
   const lapTimer = () => {
-    const lapTime = currentTime.toFixed(3);
+    const lapTime = (currentTime / 1000).toFixed(3);
     setLaps((prevLaps) => [...prevLaps, lapTime]);
     lapSectionRef.current.style.display = 'block';
   };
 
   const resetTimer = () => {
+    clearInterval(intervalRef.current);
+    intervalRef.current = 0;
     setCurrentTime(0);
     setLaps([]);
     lapSectionRef.current.style.display = 'none';
@@ -54,9 +56,13 @@ const App = () => {
       <section className='lap-section' ref={lapSectionRef}>
         <h2>Laps</h2>
         <section className='laps'>
-          {laps.map((lap, index) => (
-            <p key={index}>{lap}</p>
-          ))}
+          {laps.length > 0 ? (
+            laps.map((lap, index) => (
+              <p key={index}>{lap}</p>
+            ))
+          ) : (
+            <p>No laps recorded</p>
+          )}
         </section>
       </section>
     </div>
