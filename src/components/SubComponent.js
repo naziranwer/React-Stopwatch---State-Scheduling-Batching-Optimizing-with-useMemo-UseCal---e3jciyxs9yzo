@@ -1,16 +1,13 @@
 import React, { useState } from "react";
-import SubComponent from "./SubComponent";
-export const App = () => {
+
+export const SubComponent = () => {
   console.log("App Rerenders");
   const [task, setTask] = useState("");
   const [tasks, setTasks] = useState({
     lists: [],
     status: [],
     editing: [],
-    showSubList: [],
   });
-  // const [showSubList, setShowSubList] = useState(false);
-  // const [selectedIndex, setSelectedIndex] = useState(-1);
 
   const handleInputChange = (event) => {
     setTask(event.target.value);
@@ -18,11 +15,10 @@ export const App = () => {
 
   const addTask = () => {
     setTasks((prevTasks) => ({
-      // ...prevTasks,
+      ...prevTasks,
       lists: [...prevTasks.lists, task],
       status: [...prevTasks.status, false],
       editing: [...prevTasks.editing, false],
-      showSubList: [...prevTasks.showSubList, false],
     }));
     // setTask("");
   };
@@ -61,23 +57,15 @@ export const App = () => {
       lists: prevTasks.lists.filter((item, i) => i !== index),
       status: prevTasks.status.filter((item, i) => i !== index),
       editing: prevTasks.editing.filter((item, i) => i !== index),
-      showSubList: prevTasks.showSubList.filter((item, i) => i != index),
     }));
   };
-
-  const handleSublist = (index) => {
-    setTasks((prevTasks) => ({
-      ...prevTasks,
-      showSubList: prevTasks.showSubList.map((value, i) =>
-        i === index ? !value : value
-      ),
-    }));
-  };
-  console.log(tasks.showSubList);
 
   return (
-    <div className="App">
-      <h1>To-Do List</h1>
+    <div
+      className="inside-app"
+      style={{ marginLeft: "100px", marginBottom: "10px" }}
+    >
+      <h3>Sub-List</h3>
       <div>
         <input
           type="text"
@@ -101,10 +89,6 @@ export const App = () => {
                   {item}
                   <button onClick={() => editTask(index)}>Edit</button>
                   <button onClick={() => deleteTask(index)}>Delete</button>
-                  <button onClick={() => handleSublist(index)}>
-                    Add SubList
-                  </button>
-                  {tasks.showSubList[index] && <SubComponent />}
                 </>
               ) : (
                 <>
@@ -121,10 +105,10 @@ export const App = () => {
           ))}
         </ul>
       ) : (
-        <p>Please Add tasks</p>
+        <p>Please Add Subtasks</p>
       )}
     </div>
   );
 };
 
-export default App;
+export default SubComponent;
